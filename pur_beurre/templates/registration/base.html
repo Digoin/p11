@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <script src="{% static 'js/script.js' %} "></script>
 </head>
-<body>
-    <header>
+<body class="container">
+    <header class="row ">
+      <img class="col-1" src="{% static 'img/pur_beurre_logo.png' %}"></img>
+      <h1 class="col-2">Pur beurre</h1>
     </header>
     <section>
         {% block content %}Page contents{% endblock content %}
