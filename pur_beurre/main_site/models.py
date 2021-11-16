@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Product(models.Model):
-    name = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
+    url = models.CharField(max_length=200, unique=True)
     nutriscore = models.CharField(max_length=1)
     users = models.ManyToManyField(User)
     
@@ -14,7 +14,7 @@ class Product(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     products = models.ManyToManyField(Product)
 
     def __str__(self):
