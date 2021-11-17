@@ -1,7 +1,6 @@
-import json
 import requests
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from main_site.models import Category, Product
 from ._product_maker import ApiProduct
 from django.db import IntegrityError
