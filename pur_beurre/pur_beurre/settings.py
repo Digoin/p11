@@ -56,7 +56,7 @@ ROOT_URLCONF = 'pur_beurre.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +81,7 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'purBeurre',
+        'NAME': 'pur_beurre',
 
         'USER': 'postgres',
 
@@ -147,3 +147,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL ='/'
+
+
+AUTH_USER_MODEL = 'user_management.UserExtension'
