@@ -4,19 +4,26 @@
   <meta charset="utf-8">
   <title>{% block title %}Page title{% endblock title %}</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'main_site/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'main_site/css/style.css' %}">
   <script src="{% static 'js/script.js' %} "></script>
 </head>
-<body class="container">
-    <header class="row ">
-      <img class="col-1" src="{% static 'img/pur_beurre_logo.png' %}"></img>
-      <h1 class="col-2">Pur beurre</h1>
+<body class="container-fluid bg-image bg-img">
+    <header class="row align-items-center justify-content-center">
+      <img class="col-1 img-fluid" style="height: 50px; width: 70px" src="{% static 'main_site/img/pur_beurre_logo.png' %}"></img>
+      <h1 class="col-2 col-sm-3 col-md-4 col-lg-5">Pur beurre</h1>
+      <input class="col-4 col-sm-3 col-lg-2" type="text" placeholder="Recherche...">
+      <img class="col-4 col-sm-1 img-fluid" style="height: 50px; width: 70px" src="{% static 'main_site/img/user-logo.png' %}">
+      <img class="col-4 col-sm-1 img-fluid" style="height: 50px; width: 70px" src="{% static 'main_site/img/carrot-logo.png' %}">
+      <img class="col-4 col-sm-1 img-fluid" style="height: 50px; width: 70px" src="{% static 'main_site/img/deconection-logo.png' %}">
     </header>
     <section>
         {% block content %}Page contents{% endblock content %}
     </section>
-    <footer>
+    <footer class="row justify-content-center">
+      <hr>
+      <p class="col-6 text-center"><strong>Mentions légales</strong></p>
+      <p class="col-6 text-center"><strong>Contact</strong></p>
     </footer>
 </body>
 </html>
