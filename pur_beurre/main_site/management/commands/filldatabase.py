@@ -46,8 +46,16 @@ class Command(BaseCommand):
             new_product = Product(name=product.name(), url=product.url(), nutriscore=product.nutriscore())
             try:
                 new_product.save()
+                self.link_product_categories(product)
             except IntegrityError:
                 self.stdout.write("Product already exist or his name is already used.")
+    
+    def link_product_categories(self, product):
+            for category in product.categories():
+                category_instance = Category.objects.filter(name=category)[0]
+                product_instance = Product.objects.filter(name=product.name())[0]
+                category_instance.products.add(product_instance)
+                category_instance.save()
 
     def handle(self, *args, **options):
         for category_name in options['category_names']:
