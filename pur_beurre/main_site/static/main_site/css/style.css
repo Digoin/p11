@@ -25,3 +25,8 @@ footer {
     background-image: url("../img/main-page-back-ground.png");
     height: 100%;
 }
+
+.img-reverse {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
