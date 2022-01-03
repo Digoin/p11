@@ -62,3 +62,14 @@ class ApiProduct:
         except KeyError:
             print("Product language not found")
             return None
+
+    def image_url(self):
+        """"Search the image of the product"""
+        try:
+            if self.json_product["image_url"] != "":
+                return self.json_product["image_url"]
+            else:
+                return None
+        except KeyError:
+            print("Image's url not found")
+            return None

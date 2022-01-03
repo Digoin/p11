@@ -25,3 +25,9 @@ footer {
     background-image: url("../img/main-page-back-ground.png");
     height: 100%;
 }
+
+.test {
+    height: 200px;
+    background-image: url("https://images.openfoodfacts.org/images/products/761/303/704/2573/front_fr.37.400.jpg");
+    background-size: cover;
+}
