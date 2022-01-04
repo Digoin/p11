@@ -34,7 +34,7 @@ class ApiProduct:
         """Search for nutriscore"""
         try:
             if self.json_product["nutrition_grades"] != "":
-                return self.json_product["nutrition_grades"]
+                return self.json_product["nutrition_grades"].upper()
             else:
                 return None
         except KeyError:
