@@ -25,3 +25,15 @@ footer {
     background-image: url("../img/main-page-back-ground.png");
     height: 100%;
 }
+
+.product-presentation {
+    height: 220px;
+}
+
+.product-img {
+    height: 220px;
+}
+
+.mussels-bg {
+    background-color: #345A61;
+}
