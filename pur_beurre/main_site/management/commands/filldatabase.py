@@ -62,7 +62,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for pages in range(1, options['number_of_pages'][0]):
-            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             products_list = self.products_list_creator(options['category_name'], pages)
             self.fill_categories(products_list)
             self.fill_products(products_list)

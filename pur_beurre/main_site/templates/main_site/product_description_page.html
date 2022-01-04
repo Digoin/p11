@@ -5,7 +5,37 @@
 
 {% block content %}
 <div class="row">
-    <div class="test">
+    <h2 class="col text-center my-4">{{ product_name }}</h2>
+</div>
+<div class="row h4 mt-3 mb-5">
+    <div class="col text-center">
+        <span class="badge rounded-pill mussels-bg">{{ product_nutriscore }}</span>
     </div>
+</div>
+<div class="row justify-content-center">
+    <a class="col product-presentation text-center" href="{{ product_url }}">
+        <img class="product-img" src="{{ product_image }}">
+    </a>
+</div>
+<hr class="my-5">
+<h2 class="row justify-content-center">Produits de substitution</h2>
+<div class="row">
+    {% for product in substitute_products %}
+        <div class="col-4">
+            <div>
+                <h2 class="col text-center my-4">{{ product.name }}</h2>
+            </div>
+            <div class="row h4 mt-3 mb-5">
+                <div class="col text-center">
+                    <span class="badge rounded-pill mussels-bg">{{ product.nutriscore }}</span>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <a class="col product-presentation text-center" href="{% url 'main_site:product' product.id %}">
+                    <img class="product-img" src="{{ product.img_url }}">
+                </a>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 {% endblock content %}
