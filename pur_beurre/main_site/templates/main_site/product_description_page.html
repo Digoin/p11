@@ -13,8 +13,8 @@
     </div>
 </div>
 <div class="row justify-content-center">
-    <a class="col product-presentation text-center" href="{{ product_url }}">
-        <img class="product-img" src="{{ product_image }}">
+    <a class="col-6 product-presentation text-center" href="{{ product_url }}">
+        <img class="focused-product-img" src="{{ product_image }}">
     </a>
 </div>
 <hr class="my-5">
@@ -30,9 +30,9 @@
                     <span class="badge rounded-pill mussels-bg">{{ product.nutriscore }}</span>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-5">
                 <a class="col product-presentation text-center" href="{% url 'main_site:product' product.id %}">
-                    <img class="product-img" src="{{ product.img_url }}">
+                    <img class="substitution-product-img" src="{{ product.img_url }}">
                 </a>
             </div>
         </div>
