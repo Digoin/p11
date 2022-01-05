@@ -8,7 +8,7 @@ def home(request):
     return render(request, 'main_site/welcome_page.html')
 
 def legal_notice(request):
-    return render(request, 'base/legal_notice.html')
+    return render(request, 'main_site/legal_notice.html')
 
 def product_description(request, product_id):
     substitute_products = []
