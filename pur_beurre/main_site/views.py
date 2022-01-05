@@ -9,7 +9,7 @@ def home(request):
 
 def legal_notice(request):
     return render(request, 'main_site/legal_notice.html')
-
+  
 def product_description(request, product_id):
     substitute_products = []
     product = Product.objects.get(id=product_id)

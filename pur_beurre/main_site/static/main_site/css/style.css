@@ -26,6 +26,11 @@ footer {
     height: 100%;
 }
 
+.img-reverse {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
 .product-presentation {
     height: 220px;
 }
