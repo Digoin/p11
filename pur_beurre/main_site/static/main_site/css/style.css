@@ -30,3 +30,16 @@ footer {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
+.product-presentation {
+    height: 220px;
+}
+
+.product-img {
+    height: 100%;
+    width: 250px;
+}
+
+.mussels-bg {
+    background-color: #345A61;
+}

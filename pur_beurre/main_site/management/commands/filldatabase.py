@@ -9,11 +9,12 @@ class Command(BaseCommand):
     help = 'Fill the database with the specified categories and linked products'
 
     def add_arguments(self, parser):
-        parser.add_argument('category_names', nargs='+', type=str)
+        parser.add_argument('category_name', nargs='+', type=str)
+        parser.add_argument('number_of_pages', nargs='+', type=int)
 
-    def products_list_creator(self, category):
+    def products_list_creator(self, category, number_of_pages):
         products_list = []
-        api_request = dict(requests.get(f"https://fr-en.openfoodfacts.org/category/{category}.json").json())
+        api_request = dict(requests.get(f"https://fr-en.openfoodfacts.org/category/{category}/{number_of_pages}.json").json())
         for json_product in api_request["products"]:
             product = ApiProduct(json_product)
             if self.product_data_validity(product):
@@ -27,6 +28,8 @@ class Command(BaseCommand):
             or product.nutriscore() is None
             or product.url() is None
             or product.categories_language() is None
+            or product.categories_language() != "fr"
+            or product.image_url() is None
         ):
             return False
         else:
@@ -43,7 +46,7 @@ class Command(BaseCommand):
 
     def fill_products(self, products):
         for product in products:
-            new_product = Product(name=product.name(), url=product.url(), nutriscore=product.nutriscore())
+            new_product = Product(name=product.name(), url=product.url(), nutriscore=product.nutriscore(), img_url=product.image_url())
             try:
                 new_product.save()
                 self.link_product_categories(product)
@@ -58,8 +61,8 @@ class Command(BaseCommand):
                 category_instance.save()
 
     def handle(self, *args, **options):
-        for category_name in options['category_names']:
-            products_list = self.products_list_creator(category_name)
+        for pages in range(1, options['number_of_pages'][0]):
+            products_list = self.products_list_creator(options['category_name'], pages)
             self.fill_categories(products_list)
             self.fill_products(products_list)
 

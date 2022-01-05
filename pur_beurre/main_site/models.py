@@ -10,6 +10,7 @@ class Product(models.Model):
     url = models.CharField(max_length=200, unique=True)
     nutriscore = models.CharField(max_length=1)
     users = models.ManyToManyField(User)
+    img_url = models.CharField(max_length=200, unique=True)
     
     def __str__(self):
         return self.name
