@@ -31,6 +31,10 @@ def product_description(request, product_id):
         "product_nutriscore" : product.nutriscore,
         "product_url" : product.url,
         "product_image" : product.img_url,
+        "product_kcal" : product.kcal,
+        "product_fat" : product.fat,
+        "product_protein" : product.protein,
+        "product_sugar" : product.sugar,
         "substitute_products" : best_subsitute_products,
     }
     return render(request, 'main_site/product_description_page.html', context)

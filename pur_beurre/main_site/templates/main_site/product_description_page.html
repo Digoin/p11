@@ -5,17 +5,40 @@
 
 {% block content %}
 <div class="row">
-    <h2 class="col text-center my-4">{{ product_name }}</h2>
+    <h2 class="col-8 text-center my-4">{{ product_name }}</h2>
 </div>
 <div class="row h4 mt-3 mb-5">
-    <div class="col text-center">
+    <div class="col-8 text-center">
         <span class="badge rounded-pill mussels-bg">{{ product_nutriscore }}</span>
     </div>
 </div>
-<div class="row justify-content-center">
-    <a class="col-6 product-presentation text-center" href="{{ product_url }}">
+<div class="row">
+    <a class="col-8 product-presentation text-center" href="{{ product_url }}">
         <img class="focused-product-img" src="{{ product_image }}">
     </a>
+    <div class="col-2 mt-2">
+        <h3 class="text-center">Valeur nutritive</h3>
+        <table class="table bg-light rounded">
+            <tbody>
+                <tr>
+                    <th scope="row">Kcal/100g</th>
+                    <td>{{ product_kcal }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lipides/100g</th>
+                    <td>{{ product_fat }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Protéines/100g</th>
+                    <td>{{ product_protein }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Glucides/100g</th>
+                    <td>{{ product_sugar }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <hr class="my-5">
 <h2 class="row justify-content-center">Produits de substitution</h2>
