@@ -11,6 +11,10 @@ class Product(models.Model):
     nutriscore = models.CharField(max_length=1)
     users = models.ManyToManyField(User)
     img_url = models.CharField(max_length=200, unique=True)
+    kcal = models.IntegerField()
+    fat = models.IntegerField()
+    protein = models.IntegerField()
+    sugar = models.IntegerField()
     
     def __str__(self):
         return self.name
