@@ -73,3 +73,51 @@ class ApiProduct:
         except KeyError:
             print("Image's url not found")
             return None
+
+    def kcal(self):
+        """"Search the kcal for 100g of the product"""
+        try:
+            product_kcal = self.json_product["nutriments"]["energy-kcal_100g"]
+        except KeyError:
+            print("Kcal not found")
+            return None
+        if product_kcal != "":
+            return product_kcal
+        else:
+            return None
+
+    def fat(self):
+        """"Search the fat for 100g of the product"""
+        try:
+            product_fat = self.json_product["nutriments"]["fat_100g"]
+        except KeyError:
+            print("Fat not found")
+            return None
+        if product_fat != "":
+            return product_fat
+        else:
+            return None
+
+    def protein(self):
+        """"Search the protein for 100g of the product"""
+        try:
+            product_protein = self.json_product["nutriments"]["proteins_100g"]
+        except KeyError:
+            print("Protein not found")
+            return None
+        if product_protein != "":
+            return product_protein
+        else:
+            return None
+
+    def sugar(self):
+        """"Search the sugar for 100g of the product"""
+        try:
+            product_sugar = self.json_product["nutriments"]["sugars_100g"]
+        except KeyError:
+            print("Sugar not found")
+            return None
+        if product_sugar != "":
+            return product_sugar
+        else:
+            return None

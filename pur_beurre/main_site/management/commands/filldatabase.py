@@ -30,6 +30,10 @@ class Command(BaseCommand):
             or product.categories_language() is None
             or product.categories_language() != "fr"
             or product.image_url() is None
+            or product.kcal() is None
+            or product.fat() is None
+            or product.protein() is None
+            or product.sugar() is None
         ):
             return False
         else:
@@ -46,7 +50,16 @@ class Command(BaseCommand):
 
     def fill_products(self, products):
         for product in products:
-            new_product = Product(name=product.name(), url=product.url(), nutriscore=product.nutriscore(), img_url=product.image_url())
+            new_product = Product(
+                name=product.name(),
+                url=product.url(),
+                nutriscore=product.nutriscore(),
+                img_url=product.image_url(),
+                kcal=product.kcal(),
+                fat=product.fat(),
+                protein=product.protein(),
+                sugar=product.sugar()
+            )
             try:
                 new_product.save()
                 self.link_product_categories(product)
