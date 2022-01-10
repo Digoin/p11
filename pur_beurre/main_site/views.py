@@ -1,12 +1,15 @@
 import string
-
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from main_site.models import Product
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
+from .forms import ProductResearch
+
 # Create your views here.
 
 def home(request):
+
     return render(request, 'main_site/welcome_page.html')
 
 def legal_notice(request):
@@ -46,10 +49,11 @@ def product_description(request, product_id):
 
     return render(request, 'main_site/product_description_page.html', context)
 
-def product_research(request, research):
+def product_research(request):
     no_repetition_result = []
     vectors = SearchVector('name', weight='A') + SearchVector('category__name', weight='B')
-    query = SearchQuery(f'{research}')
+    query = SearchQuery(f'{request.GET.get("product_searched")}')
+    print(request.GET.get("product_searched"))
 
     research_result = Product.objects.annotate(rank=SearchRank(vectors, query)).order_by('-rank')
 
@@ -57,4 +61,6 @@ def product_research(request, research):
         if product not in no_repetition_result:
             no_repetition_result.append(product)
 
-    return render(request, 'main_site/product_research.html', no_repetition_result)
+    context = {"results": no_repetition_result}
+    print(context)
+    return render(request, 'main_site/product_research.html', context)
