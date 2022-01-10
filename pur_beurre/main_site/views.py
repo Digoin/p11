@@ -4,7 +4,6 @@ from django.shortcuts import render
 from main_site.models import Product
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
-from .forms import ProductResearch
 
 # Create your views here.
 
@@ -62,5 +61,5 @@ def product_research(request):
             no_repetition_result.append(product)
 
     context = {"results": no_repetition_result}
-    print(context)
+
     return render(request, 'main_site/product_research.html', context)
