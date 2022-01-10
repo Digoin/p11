@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Recherche{% endblock title %}
+
+{% block content %}
+<form class = "row justify-content-center mt-5" action = "/research/" method = "get">
+    {% csrf_token %}
+    <div class="col-1"></div>
+    <input class="col-2" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
+    <div class="col-1">
+        <input class="btn btn-primary"  type="submit" value="OK">
+    </div>
+</form>
+<div class="row">
+    {% for product in results %}
+        <div class="col-4">
+            <div>
+                <h2 class="col text-center my-4">{{ product.name }}</h2>
+            </div>
+            <div class="row h4 mt-3 mb-5">
+                <div class="col text-center">
+                    <span class="badge rounded-pill mussels-bg">{{ product.nutriscore }}</span>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-5">
+                <a class="col product-presentation text-center" href="{% url 'main_site:product' product.id %}">
+                    <img class="substitution-product-img" src="{{ product.img_url }}">
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

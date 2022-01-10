@@ -7,14 +7,14 @@
 <div>
     <h1 class="row justify-content-center mt-5">Du gras, oui, mais de qualité !</h1>
     <h2 class="row justify-content-center mt-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</h2>
-    <form class="row justify-content-center mt-5">
-        <div class="col-2">
-            <input class="form-control" placeholder="Produit">
-        </div>
-        <div class="col-1">
-            <input class="btn btn-primary" type="submit" value="Chercher">
-        </div>
-    </form>
+        <form class = "row justify-content-center mt-5" action = "/research/" method = "get">
+            {% csrf_token %}
+            <div class="col-1"></div>
+            <input class="col-2" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
+            <div class="col-1">
+                <input class="btn btn-primary"  type="submit" value="OK">
+            </div>
+        </form>
 </div>
 <hr class="my-5">
 <h2 class="row justify-content-center">Colette et Remy</h2>
