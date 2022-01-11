@@ -47,3 +47,8 @@ footer {
 .mussels-bg {
     background-color: #345A61;
 }
+
+.disk-button {
+    height: 50px;
+    width: 50px;
+}

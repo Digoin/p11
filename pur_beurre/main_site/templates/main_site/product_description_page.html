@@ -58,6 +58,10 @@
                     <img class="substitution-product-img" src="{{ product.img_url }}">
                 </a>
             </div>
+            <form class = "row justify-content-center mt-5" method = "post">
+                {% csrf_token %}
+                <input class="btn disk-button" type="image" src="{% static 'main_site/img/disk-logo.png' %}">
+            </form>
         </div>
     {% endfor %}
 </div>

@@ -39,6 +39,9 @@ def product_description(request, product_id):
     best_subsitute_products = []
     nutriscore_count = 0
 
+    if request.method == "POST":
+        
+
     product = Product.objects.get(id=product_id)
 
     for categories in product.category_set.all():
@@ -72,7 +75,6 @@ def product_research(request):
     no_repetition_result = []
     vectors = SearchVector('name', weight='A') + SearchVector('category__name', weight='B')
     query = SearchQuery(f'{request.GET.get("product_searched")}')
-    print(request.GET.get("product_searched"))
 
     research_result = Product.objects.annotate(rank=SearchRank(vectors, query)).order_by('-rank')
 
