@@ -4,8 +4,7 @@ from main_site.models import Product
 
 class UserExtension(AbstractUser):
 
-    email = models.EmailField(('email address'), unique=True)
     favorites = models.ManyToManyField(Product)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
