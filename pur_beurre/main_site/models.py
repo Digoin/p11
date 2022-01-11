@@ -9,7 +9,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200, unique=True)
     url = models.CharField(max_length=200, unique=True)
     nutriscore = models.CharField(max_length=1)
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(User, blank=True, null=True)
     img_url = models.CharField(max_length=200, unique=True)
     kcal = models.IntegerField()
     fat = models.IntegerField()

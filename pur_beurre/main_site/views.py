@@ -12,21 +12,23 @@ def home(request):
     return render(request, 'main_site/welcome_page.html')
 
 def account_detail(request):
+    favorite_message = "Produits favoris"
 
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user_management:signup'))
 
-    favorite_products = request.user.favorites
-    print(favorite_products)
+    favorite_products = request.user.product_set.all()
+    if list(favorite_products) == []:
+        favorite_message = "Vous n'avez aucun produit favori."
+
     context  = {
         "username" : request.user.username,
         "email" : request.user.email,
-        "favorite_message" : None
+        "favorite_message" : favorite_message,
+        "favorite_products" : favorite_products,
     }
 
     return render(request, 'main_site/account_detail.html', context)
-
-
 
 def legal_notice(request):
 
