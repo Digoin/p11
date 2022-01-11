@@ -1,0 +1,10 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Compte{% endblock title %}
+
+{% block content %}
+<h1 class="row justify-content-center my-3">Bonjour {{ username }} !</h1>
+<p class="row justify-content-center fs-4 my-4">Email : {{ email }}</p>
+<h2 class="row justify-content-center my-5">{{ favorite_message }}</h2>
+{% endblock content %}

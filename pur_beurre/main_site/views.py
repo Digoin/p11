@@ -3,7 +3,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from main_site.models import Product
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
-
+from django.urls import reverse
 
 # Create your views here.
 
@@ -11,7 +11,25 @@ def home(request):
 
     return render(request, 'main_site/welcome_page.html')
 
+def account_detail(request):
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user_management:signup'))
+
+    favorite_products = request.user.favorites
+    print(favorite_products)
+    context  = {
+        "username" : request.user.username,
+        "email" : request.user.email,
+        "favorite_message" : None
+    }
+
+    return render(request, 'main_site/account_detail.html', context)
+
+
+
 def legal_notice(request):
+
     return render(request, 'main_site/legal_notice.html')
   
 def product_description(request, product_id):
