@@ -49,6 +49,10 @@ footer {
 }
 
 .disk-button {
-    height: 50px;
-    width: 50px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }

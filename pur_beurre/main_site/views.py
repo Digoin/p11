@@ -38,8 +38,6 @@ def product_description(request, product_id):
     substitute_products = []
     best_subsitute_products = []
     nutriscore_count = 0
-
-    if request.method == "POST":
         
 
     product = Product.objects.get(id=product_id)
@@ -58,14 +56,6 @@ def product_description(request, product_id):
         nutriscore_count += 1
 
     context = {
-        "product_name" : product.name,
-        "product_nutriscore" : product.nutriscore,
-        "product_url" : product.url,
-        "product_image" : product.img_url,
-        "product_kcal" : product.kcal,
-        "product_fat" : product.fat,
-        "product_protein" : product.protein,
-        "product_sugar" : product.sugar,
         "substitute_products" : best_subsitute_products,
     }
 
@@ -83,5 +73,10 @@ def product_research(request):
             no_repetition_result.append(product)
 
     context = {"results": no_repetition_result}
-
+    request.session['research_parameter'] = request.GET.get("product_searched")
     return render(request, 'main_site/product_research.html', context)
+
+def add_favorite(request):
+    product_id = request.POST.get("product_id")
+    print(product_id)
+    return HttpResponseRedirect(f'/research/?product_searched={request.session["research_parameter"]}')

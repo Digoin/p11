@@ -5,7 +5,6 @@
 
 {% block content %}
 <form class = "row justify-content-center mt-5" action = "/research/" method = "get">
-    {% csrf_token %}
     <div class="col-1"></div>
     <input class="col-2" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
     <div class="col-1">
@@ -28,6 +27,11 @@
                     <img class="substitution-product-img" src="{{ product.img_url }}">
                 </a>
             </div>
+            <form method="post" action="{% url 'main_site:add-favorite' %}">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}"></input>
+                <button type="submit" class="fs-3 disk-button text-center">💾</button>
+            </form>
         </div>
     {% endfor %}
 </div>
