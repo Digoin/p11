@@ -10,9 +10,9 @@
         <form class = "row justify-content-center mt-5" action = "/research/" method = "get">
             {% csrf_token %}
             <div class="col-1"></div>
-            <input class="col-2" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
+            <input class="col-6 col-sm-5 col-md-4 col-lg-3" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
             <div class="col-1">
-                <input class="btn btn-primary"  type="submit" value="OK">
+                <input class="btn btn-primary"  type="submit" value="Rechercher">
             </div>
         </form>
 </div>
@@ -22,16 +22,13 @@
 <h3 class="h4">De la ratatouille aux croissants</h3>
 <p class="mb-5">Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que vous avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille.</p>
 <div class="row justify-content-center mt-5">
-    <p class="col-1 fs-3 text-center ps-5">Colette</p>
-    <img class="col-1 col-sm-1 img-fluid" style="height: 92px; width: 136px" src="{% static 'main_site/img/arrow.png' %}">
-    <div class="col-4"></div>
-    <img class="col-1 col-sm-1 img-fluid img-reverse" style="height: 92px; width: 136px" src="{% static 'main_site/img/arrow.png' %}">
-    <p class="col-1 fs-3 text-center pe-5">Remy</p>
+    <p class="col-5 col-sm-3 col-md-2 fs-3 text-center">Colette</p>
+    <div class="col-1"></div>
+    <p class="col-5 col-sm-3 col-md-2 fs-3 text-center">Remy</p>
 </div>
 <div class="row justify-content-center">
-    <img class="col-4 col-sm-1 img-fluid" style="height: 499px; width: 230px" src="{% static 'main_site/img/colette-tatou-portrait.png' %}">
-    <div class="col-1"></div>
-    <img class="col-4 col-sm-1 img-fluid mt-5" style="height: 499px; width: 230px" src="{% static 'main_site/img/remy-portrait.png' %}">
+    <img class="col-4 img-fluid" style="height: 499px; width: 230px" src="{% static 'main_site/img/colette-tatou-portrait.png' %}">
+    <img class="col-4 img-fluid mt-5" style="height: 499px; width: 230px" src="{% static 'main_site/img/remy-portrait.png' %}">
 </div>
 <div class="row">
     <p class="col-6">

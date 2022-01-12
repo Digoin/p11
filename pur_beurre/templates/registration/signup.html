@@ -1,21 +1,27 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-  <h2>Sign up</h2>
+  <h2 class="row justify-content-center">Création d'un compte</h2>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
-      <p>
+    <div class="row justify-content-center">
+      <p class="col-12 text-center">
         {{ field.label_tag }}<br>
         {{ field }}
         {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
         {% endif %}
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
       </p>
+    </div>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <div class="row justify-content-center">
+      <p class="col-12 text-center"><button type="submit">Création</button></p>
+    </div>
   </form>
+  <p class="row justify-content-center">
+    <a class="col-12 text-center" href="{% url 'user_management:signup' %}">Vous avez déjà un compte ?</a>
+  </p>
 {% endblock %}
