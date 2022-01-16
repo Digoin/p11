@@ -6,14 +6,14 @@
 {% block content %}
 <form class = "row justify-content-center mt-5" action = "/research/" method = "get">
     <div class="col-1"></div>
-    <input class="col-2" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
+    <input class="col-6 col-sm-5 col-md-4 col-lg-3" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
     <div class="col-1">
-        <input class="btn btn-primary"  type="submit" value="OK">
+        <input class="btn btn-primary" type="submit" value="Rechercher">
     </div>
 </form>
 <div class="row">
     {% for product in results %}
-        <div class="col-4">
+        <div class="col-12 col-sm-6 col-lg-4">
             <div>
                 <h2 class="col text-center my-4">{{ product.name }}</h2>
             </div>
