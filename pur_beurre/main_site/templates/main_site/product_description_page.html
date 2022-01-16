@@ -5,16 +5,16 @@
 
 {% block content %}
 <div class="row">
-    <h2 class="col-12 col-lg-11 col-xl-10 text-center my-4">{{ product_name }}</h2>
+    <h2 class="col-12 col-lg-11 col-xl-10 text-center my-4">{{ focused_product.name }}</h2>
 </div>
 <div class="row h4 mt-3 mb-5">
     <div class="col-12 col-lg-11 col-xl-10 text-center">
-        <span class="badge rounded-pill mussels-bg">{{ product_nutriscore }}</span>
+        <span class="badge rounded-pill mussels-bg">{{ focused_product.nutriscore }}</span>
     </div>
 </div>
 <div class="row justify-content-center">
-    <a class="col-12 col-lg-9 col-xl-8 product-presentation text-center mb-5" href="{{ product_url }}">
-        <img class="focused-product-img" src="{{ product_image }}">
+    <a class="col-12 col-lg-9 col-xl-8 product-presentation text-center mb-5" href="{{ focused_product.url }}">
+        <img class="focused-product-img" src="{{ focused_product.img_url }}">
     </a>
     <div class="col-6 col-md-5 col-lg-2 mt-2">
         <h3 class="text-center">Valeur nutritive</h3>
@@ -22,24 +22,29 @@
             <tbody>
                 <tr>
                     <th scope="row">Kcal/100g</th>
-                    <td>{{ product_kcal }}</td>
+                    <td>{{ focused_product.kcal }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Lipides/100g</th>
-                    <td>{{ product_fat }}</td>
+                    <td>{{ focused_product.fat }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Protéines/100g</th>
-                    <td>{{ product_protein }}</td>
+                    <td>{{ focused_product.protein }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Glucides/100g</th>
-                    <td>{{ product_sugar }}</td>
+                    <td>{{ focused_product.sugar }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+<form class="row justify-content-center mt-5" method="post" action="{% url 'main_site:add-favorite' %}">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ focused_product.id }}"></input>
+    <button type="submit" class="fs-1 disk-button" style="{% if focused_product not in favorite_products %} color:rgba(0, 0, 0, 0.5){% endif %}">💾</button>
+</form>
 <hr class="my-5">
 <h2 class="row justify-content-center">Produits de substitution</h2>
 <div class="row">
