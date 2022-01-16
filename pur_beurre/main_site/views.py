@@ -35,6 +35,7 @@ def legal_notice(request):
     return render(request, 'main_site/legal_notice.html')
   
 def product_description(request, product_id):
+    favorite_products = []
     substitute_products = []
     best_subsitute_products = []
     nutriscore_count = 0
@@ -46,7 +47,8 @@ def product_description(request, product_id):
             if string.ascii_uppercase.index(linked_product.nutriscore) <= string.ascii_uppercase.index(product.nutriscore) and linked_product not in substitute_products and linked_product != product:
                 substitute_products.append(linked_product)
 
-    favorite_products = request.user.product_set.all()
+    if request.user.is_authenticated:
+        favorite_products = request.user.product_set.all()
     
     while nutriscore_count < 4:
         for best_product in substitute_products:
@@ -100,6 +102,9 @@ def favorites(request):
     return render(request, 'main_site/favorite_page.html', context)
 
 def add_favorite(request):
+    
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user_management:signup'))
 
     product_id = request.POST.get("product_id")
 
