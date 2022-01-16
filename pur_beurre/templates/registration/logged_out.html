@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Login</title>
-  </head>
-  <body>
-    <p>Logged out!</p>
-    <a href="{% url 'user_management:login'%}">Click here to login again.</a>
-  </body>
-</html>
+{% extends "base/base.html" %}
+
+{% block title %}Acceuil{% endblock title %}
+
+{% block content %}
+    <p class="row justify-content-center fs-2">Vous avez été déconnecté</p>
+    <a class="row justify-content-center" href="{% url 'user_management:login'%}">Cliquez ici pour vous connecter de nouveau</a>
+{% endblock content %}
