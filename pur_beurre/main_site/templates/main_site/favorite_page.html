@@ -1,18 +1,12 @@
 {% extends "base/base.html" %}
 {% load static %}
 
-{% block title %}Recherche{% endblock title %}
+{% block title %}Favoris{% endblock title %}
 
 {% block content %}
-<form class = "row justify-content-center mt-5" action = "/research/" method = "get">
-    <div class="col-1"></div>
-    <input class="col-2" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
-    <div class="col-1">
-        <input class="btn btn-primary"  type="submit" value="OK">
-    </div>
-</form>
+<h2 class="row justify-content-center my-5">{{ favorite_message }}</h2>
 <div class="row">
-    {% for product in results %}
+    {% for product in favorite_products %}
         <div class="col-4">
             <div>
                 <h2 class="col text-center my-4">{{ product.name }}</h2>

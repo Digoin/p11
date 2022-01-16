@@ -1,3 +1,4 @@
+from multiprocessing import context
 import string
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -23,9 +24,7 @@ def account_detail(request):
 
     context  = {
         "username" : request.user.username,
-        "email" : request.user.email,
-        "favorite_message" : favorite_message,
-        "favorite_products" : favorite_products,
+        "email" : request.user.email
     }
 
     return render(request, 'main_site/account_detail.html', context)
@@ -39,13 +38,14 @@ def product_description(request, product_id):
     best_subsitute_products = []
     nutriscore_count = 0
         
-
     product = Product.objects.get(id=product_id)
 
     for categories in product.category_set.all():
         for linked_product in categories.products.all():
             if string.ascii_uppercase.index(linked_product.nutriscore) <= string.ascii_uppercase.index(product.nutriscore) and linked_product not in substitute_products and linked_product != product:
                 substitute_products.append(linked_product)
+
+    favorite_products = request.user.product_set.all()
     
     while nutriscore_count < 4:
         for best_product in substitute_products:
@@ -57,6 +57,7 @@ def product_description(request, product_id):
 
     context = {
         "substitute_products" : best_subsitute_products,
+        "favorite_products" : favorite_products,
     }
 
     return render(request, 'main_site/product_description_page.html', context)
@@ -68,15 +69,43 @@ def product_research(request):
 
     research_result = Product.objects.annotate(rank=SearchRank(vectors, query)).order_by('-rank')
 
+    favorite_products = request.user.product_set.all()
+
     for product in research_result:
         if product not in no_repetition_result:
             no_repetition_result.append(product)
 
-    context = {"results": no_repetition_result}
+    context = {
+        "results": no_repetition_result,
+        "favorite_products": favorite_products
+    }
     request.session['research_parameter'] = request.GET.get("product_searched")
     return render(request, 'main_site/product_research.html', context)
 
+def favorites(request):
+    favorite_message = "Produits favoris"
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user_management:signup'))
+
+    favorite_products = request.user.product_set.all()
+
+    if list(favorite_products) == []:
+        favorite_message = "Vous n'avez aucun produit favori."
+
+    context  = {
+        "favorite_message" : favorite_message,
+        "favorite_products" : favorite_products,
+    }
+
+    return render(request, 'main_site/favorite_page.html', context)
+
 def add_favorite(request):
+
     product_id = request.POST.get("product_id")
-    print(product_id)
+    product = Product.objects.get(id=product_id)
+    user_connected = request.user
+
+    product.users.add(user_connected)
+
     return HttpResponseRedirect(f'/research/?product_searched={request.session["research_parameter"]}')
