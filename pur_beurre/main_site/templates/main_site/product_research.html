@@ -27,11 +27,6 @@
                     <img class="substitution-product-img" src="{{ product.img_url }}">
                 </a>
             </div>
-            <form class="row justify-content-center" method="post" action="{% url 'main_site:add-favorite' %}">
-                {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ product.id }}"></input>
-                <button type="submit" class="fs-3 disk-button" style="{% if product not in favorite_products %} color:rgba(0, 0, 0, 0.5){% endif %}">💾</button>
-            </form>
         </div>
     {% endfor %}
 </div>

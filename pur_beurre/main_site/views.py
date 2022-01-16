@@ -1,8 +1,9 @@
 from multiprocessing import context
 import string
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from main_site.models import Product
+from user_management.models import UserExtension
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.urls import reverse
 
@@ -56,6 +57,7 @@ def product_description(request, product_id):
         nutriscore_count += 1
 
     context = {
+        "focused_product" : product,
         "substitute_products" : best_subsitute_products,
         "favorite_products" : favorite_products,
     }
@@ -69,15 +71,12 @@ def product_research(request):
 
     research_result = Product.objects.annotate(rank=SearchRank(vectors, query)).order_by('-rank')
 
-    favorite_products = request.user.product_set.all()
-
     for product in research_result:
         if product not in no_repetition_result:
             no_repetition_result.append(product)
 
     context = {
         "results": no_repetition_result,
-        "favorite_products": favorite_products
     }
     request.session['research_parameter'] = request.GET.get("product_searched")
     return render(request, 'main_site/product_research.html', context)
@@ -103,9 +102,14 @@ def favorites(request):
 def add_favorite(request):
 
     product_id = request.POST.get("product_id")
+
     product = Product.objects.get(id=product_id)
     user_connected = request.user
+    favorite_products = user_connected.product_set.all()
 
-    product.users.add(user_connected)
+    if product not in favorite_products:
+        product.users.add(user_connected)
+    else:
+        product.users.remove(user_connected)
 
-    return HttpResponseRedirect(f'/research/?product_searched={request.session["research_parameter"]}')
+    return HttpResponseRedirect(f'/aliment/{product_id}')
