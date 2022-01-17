@@ -47,6 +47,7 @@ def product_description(request, product_id):
             if string.ascii_uppercase.index(linked_product.nutriscore) <= string.ascii_uppercase.index(product.nutriscore) and linked_product not in substitute_products and linked_product != product:
                 substitute_products.append(linked_product)
 
+
     if request.user.is_authenticated:
         favorite_products = request.user.product_set.all()
     
