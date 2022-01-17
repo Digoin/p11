@@ -18,17 +18,16 @@ footer {
     background-color: #DE9440;
 }
 
+.header-logo {
+    height: 50px;
+}
+
 .bg-img {
     background-color:rgba(0, 0, 0, 0.5);
     background-attachment: fixed;
     background-size: cover;
     background-image: url("../img/main-page-back-ground.png");
     height: 100%;
-}
-
-.img-reverse {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
 }
 
 .product-presentation {
