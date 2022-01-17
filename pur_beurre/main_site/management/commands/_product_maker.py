@@ -17,7 +17,6 @@ class ApiProduct:
 
     def categories(self):
         """Search for categories"""
-        category_list = []
         try:
             if self.json_product["categories"] != "":
                 return [

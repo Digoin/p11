@@ -1,9 +1,9 @@
 import requests
-
 from django.core.management.base import BaseCommand
+from django.db import IntegrityError
+
 from main_site.models import Category, Product
 from ._product_maker import ApiProduct
-from django.db import IntegrityError
 
 class Command(BaseCommand):
     help = 'Fill the database with the specified categories and linked products'
