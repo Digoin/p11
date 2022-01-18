@@ -1,4 +1,4 @@
-from unittest import TestCase
+from django.test import TestCase
 from .._product_maker import ApiProduct
 
 class TestProductMaker(TestCase):
