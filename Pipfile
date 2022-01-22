@@ -9,6 +9,8 @@ psycopg2 = "*"
 requests = "*"
 
 [dev-packages]
+coverage = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.8"
