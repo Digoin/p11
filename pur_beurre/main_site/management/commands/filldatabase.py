@@ -22,7 +22,7 @@ class Command(BaseCommand):
         return products_list
 
     def product_data_validity(self, product):
-        if (
+        return (
             product.name() is None
             or product.categories() is None
             or product.nutriscore() is None
@@ -34,10 +34,7 @@ class Command(BaseCommand):
             or product.fat() is None
             or product.protein() is None
             or product.sugar() is None
-        ):
-            return False
-        else:
-            return True
+        )
 
     def fill_categories(self, products):
         for product in products:

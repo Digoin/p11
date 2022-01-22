@@ -91,7 +91,7 @@ def favorites(request):
     favorite_products = request.user.product_set.all()
 
     if list(favorite_products) == []:
-        favorite_message = "Vous n'avez aucun produit favori."
+        favorite_message = "Vous n'avez aucun produit favori"
 
     context  = {
         "favorite_message" : favorite_message,
@@ -102,7 +102,7 @@ def favorites(request):
 
 def add_favorite(request):
     
-    # Checking if user is authentificated
+    # Checking if user is authenticated
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user_management:signup'))
 

@@ -106,3 +106,40 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['results'], [self.product1, self.product3, self.product2])
 
+# Test favorites
+    def test_favorites_not_authenticated(self):
+        response = self.client.get('/favorites/')
+
+        response.user = AnonymousUser()
+
+        self.assertRedirects(response, '/signup/', status_code=302)
+
+    def test_favorites_no_favorites(self):
+        self.client.login(username="martin", password="secret")
+        response = self.client.get('/favorites/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['favorite_message'], "Vous n'avez aucun produit favori")
+        self.assertEqual(list(response.context['favorite_products']), [])
+
+    def test_favorites_one_favorite(self):
+        self.user.product_set.add(self.product1)
+        self.client.login(username="martin", password="secret")
+        response = self.client.get('/favorites/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['favorite_message'], "Produits favoris")
+        self.assertEqual(list(response.context['favorite_products']), [self.product1])
+
+# Test add_favorite
+    def test_add_favorites_not_authenticated(self):
+        response = self.client.get('/add-favorite/')
+
+        response.user = AnonymousUser()
+
+        self.assertRedirects(response, '/signup/', status_code=302)
+    
+    def test_add_favorites_new_favorite(self):
+        self.client.login(username="martin", password="secret")
+        response = self.client.get('/favorites/', {"product_id": 1})
+        # call database
