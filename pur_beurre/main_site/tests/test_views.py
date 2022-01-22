@@ -61,6 +61,11 @@ class TestViews(TestCase):
         self.category1.products.set([self.product1, self.product2])
         self.category2.products.set([self.product3])
 
+# Test home
+    def test_home(self):
+        response = self.client.get('')
+
+        self.assertEqual(response.status_code, 200)
 
 # Test account_detail
     def test_account_detail_not_authenticated(self):
@@ -77,6 +82,12 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["username"], "martin")
         self.assertEqual(response.context["email"], "martin@internet.net")
+
+# Test legal_notice
+    def test_legal_notice(self):
+        response = self.client.get('/notice/')
+
+        self.assertEqual(response.status_code, 200)
 
 # Test product_description
     def test_product_description_not_authenticated_and_no_substitute(self):
@@ -141,5 +152,6 @@ class TestViews(TestCase):
     
     def test_add_favorites_new_favorite(self):
         self.client.login(username="martin", password="secret")
-        response = self.client.get('/favorites/', {"product_id": 1})
-        # call database
+        response = self.client.get('/add-favorite/', {"product_id": 1})
+
+        

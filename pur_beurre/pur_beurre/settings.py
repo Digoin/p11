@@ -150,5 +150,3 @@ LOGIN_REDIRECT_URL = '/'
 
 
 AUTH_USER_MODEL = 'user_management.UserExtension'
-
-DJANGO_SETTINGS_MODULE = ['pytest']
