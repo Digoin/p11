@@ -150,8 +150,17 @@ class TestViews(TestCase):
 
         self.assertRedirects(response, '/signup/', status_code=302)
     
-    def test_add_favorites_new_favorite(self):
+    def test_add_favorites(self):
         self.client.login(username="martin", password="secret")
-        response = self.client.get('/add-favorite/', {"product_id": 1})
+        response = self.client.post('/add-favorite/', {"product_id": 1})
 
-        
+        self.assertRedirects(response, '/aliment/1/', status_code=302)
+        self.assertEqual(list(self.user.product_set.all()), [self.product1])
+
+    def test_delete_favorites(self):
+        self.user.product_set.add(self.product1)
+        self.client.login(username="martin", password="secret")
+        response = self.client.post('/add-favorite/', {"product_id": 1})
+
+        self.assertRedirects(response, '/aliment/1/', status_code=302)
+        self.assertEqual(list(self.user.product_set.all()), [])

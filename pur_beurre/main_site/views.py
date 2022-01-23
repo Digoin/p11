@@ -116,4 +116,4 @@ def add_favorite(request):
     else:
         product.users.remove(user_connected)
 
-    return HttpResponseRedirect(f'/aliment/{product_id}')
+    return HttpResponseRedirect(f'/aliment/{product_id}/')
