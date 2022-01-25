@@ -12,6 +12,7 @@ requests = "*"
 pytest-cov = "*"
 pytest = "*"
 pytest-django = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.8"
