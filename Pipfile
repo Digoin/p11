@@ -11,6 +11,7 @@ requests = "*"
 [dev-packages]
 coverage = "*"
 webdriver-manager = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.8"
