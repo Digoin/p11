@@ -9,6 +9,8 @@ psycopg2 = "*"
 requests = "*"
 
 [dev-packages]
+coverage = "*"
+webdriver-manager = "*"
 pytest-cov = "*"
 pytest = "*"
 pytest-django = "*"
