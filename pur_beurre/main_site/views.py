@@ -1,9 +1,7 @@
-from multiprocessing import context
 import string
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from main_site.models import Product
-from user_management.models import UserExtension
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.urls import reverse
 
@@ -14,14 +12,10 @@ def home(request):
     return render(request, 'main_site/welcome_page.html')
 
 def account_detail(request):
-    favorite_message = "Produits favoris"
 
+    # Checking if user is authentificated
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user_management:signup'))
-
-    favorite_products = request.user.product_set.all()
-    if list(favorite_products) == []:
-        favorite_message = "Vous n'avez aucun produit favori."
 
     context  = {
         "username" : request.user.username,
@@ -39,18 +33,19 @@ def product_description(request, product_id):
     substitute_products = []
     best_subsitute_products = []
     nutriscore_count = 0
-        
     product = Product.objects.get(id=product_id)
 
+    # Checking if user is authentificated
+    if request.user.is_authenticated:
+        favorite_products = request.user.product_set.all()
+
+    # Creating the list of products with better nutriscore than the main one
     for categories in product.category_set.all():
         for linked_product in categories.products.all():
             if string.ascii_uppercase.index(linked_product.nutriscore) <= string.ascii_uppercase.index(product.nutriscore) and linked_product not in substitute_products and linked_product != product:
                 substitute_products.append(linked_product)
 
-
-    if request.user.is_authenticated:
-        favorite_products = request.user.product_set.all()
-    
+    # Creating the list with the bests nutriscore from the first list
     while nutriscore_count < 4:
         for best_product in substitute_products:
             if len(best_subsitute_products) >= 6:
@@ -72,8 +67,10 @@ def product_research(request):
     vectors = SearchVector('name', weight='A') + SearchVector('category__name', weight='B')
     query = SearchQuery(f'{request.GET.get("product_searched")}')
 
+    # Executing the research
     research_result = Product.objects.annotate(rank=SearchRank(vectors, query)).order_by('-rank')
 
+    # Creating a list without repetitions
     for product in research_result:
         if product not in no_repetition_result:
             no_repetition_result.append(product)
@@ -81,19 +78,20 @@ def product_research(request):
     context = {
         "results": no_repetition_result,
     }
-    request.session['research_parameter'] = request.GET.get("product_searched")
+
     return render(request, 'main_site/product_research.html', context)
 
 def favorites(request):
     favorite_message = "Produits favoris"
 
+    # Checking if user is authentificated
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user_management:signup'))
 
     favorite_products = request.user.product_set.all()
 
     if list(favorite_products) == []:
-        favorite_message = "Vous n'avez aucun produit favori."
+        favorite_message = "Vous n'avez aucun produit favori"
 
     context  = {
         "favorite_message" : favorite_message,
@@ -104,11 +102,11 @@ def favorites(request):
 
 def add_favorite(request):
     
+    # Checking if user is authenticated
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user_management:signup'))
 
     product_id = request.POST.get("product_id")
-
     product = Product.objects.get(id=product_id)
     user_connected = request.user
     favorite_products = user_connected.product_set.all()
@@ -118,4 +116,4 @@ def add_favorite(request):
     else:
         product.users.remove(user_connected)
 
-    return HttpResponseRedirect(f'/aliment/{product_id}')
+    return HttpResponseRedirect(f'/aliment/{product_id}/')

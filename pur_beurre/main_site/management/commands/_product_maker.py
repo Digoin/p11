@@ -17,7 +17,6 @@ class ApiProduct:
 
     def categories(self):
         """Search for categories"""
-        category_list = []
         try:
             if self.json_product["categories"] != "":
                 return [
@@ -83,8 +82,6 @@ class ApiProduct:
             return None
         if product_kcal != "":
             return product_kcal
-        else:
-            return None
 
     def fat(self):
         """"Search the fat for 100g of the product"""
