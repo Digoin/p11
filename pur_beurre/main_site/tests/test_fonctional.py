@@ -86,7 +86,7 @@ class HostTest(LiveServerTestCase):
 
         add_favorite = driver.find_element_by_class_name('disk-button')
         add_favorite.click()
-        # self.assertIn("Création de compte", driver.title)
+        self.assertIn("Création de compte", driver.title)
 
         username_form = driver.find_element_by_name('username')
         email_form = driver.find_element_by_name('email')
