@@ -18,7 +18,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_signup_method_post(self):
-        user = UserExtension(id=1, username="marti", email="martin@internet.net", password = 'UltimatePassword56')
+        user = UserExtension(id=1, username="martin", email="martin@internet.net", password = 'UltimatePassword56')
         response = self.client.post('/signup/', {
             'username':'martin',
             'email':'martin@internet.net', 
