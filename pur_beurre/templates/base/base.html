@@ -18,7 +18,10 @@
       </form>
       <a class="col-4 col-md-1 text-center" href="{% url 'main_site:account' %}"><img class="img-fluid header-logo" src="{% static 'main_site/img/user-logo.png' %}"></a>
       <a class="col-4 col-md-1 text-center" href="{% url 'main_site:favorites' %}"><img class="img-fluid header-logo" src="{% static 'main_site/img/carrot-logo.png' %}"></a>
+      {% comment %} Contribution de Jeremy, le roi de Symfony. {% endcomment %}
+      {% if user.is_authenticated %}
       <a class="col-4 col-md-1 text-center" href="{% url 'user_management:logout' %}"><img class="img-fluid header-logo" src="{% static 'main_site/img/deconection-logo.png' %}"></a>
+      {% endif %}
     </header>
     <section>
         {% block content %}Page contents{% endblock content %}

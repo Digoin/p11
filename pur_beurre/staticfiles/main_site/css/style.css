@@ -1,0 +1,61 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Open Sans", sans-serif;
+}
+
+a {
+    font-family: "Scope One", sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+header {
+    background-color: #C45525;
+}
+
+footer {
+    background-color: #DE9440;
+}
+
+.header-logo {
+    height: 50px;
+}
+
+.bg-img {
+    background-color:rgba(0, 0, 0, 0.5);
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url("../img/main-page-back-ground.png");
+    height: 100%;
+}
+
+.product-presentation {
+    height: 220px;
+}
+
+.focused-product-img {
+    height: 250px;
+}
+
+.substitution-product-img {
+    height: 100%;
+    width: 250px;
+}
+
+.mussels-bg {
+    background-color: #345A61;
+}
+
+.disk-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.disk-not-favorite {  
+    color:rgba(0, 0, 0, 0.5)
+}
