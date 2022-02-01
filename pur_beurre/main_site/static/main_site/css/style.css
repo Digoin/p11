@@ -30,6 +30,12 @@ footer {
     height: 100%;
 }
 
+.bg-img-user {
+    background-size: cover;
+    background-image: url("../img/user-bg.jpg");
+    height: 200px;
+}
+
 .product-presentation {
     height: 220px;
 }
