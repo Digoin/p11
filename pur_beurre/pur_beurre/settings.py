@@ -150,3 +150,5 @@ LOGIN_REDIRECT_URL = '/'
 
 
 AUTH_USER_MODEL = 'user_management.UserExtension'
+
+AUTHENTICATION_BACKENDS = ['user_management.backends.EmailBackend']
