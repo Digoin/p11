@@ -21,14 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('P8_DJANGO_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', default="False")
+DEBUG = os.getenv('DEBUG', default="False") 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'titouan-oc-p8.herokuapp.com']
-
-CSRF_TRUSTED_ORIGINS = ['https://titouan-oc-p8.herokuapp.com']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 # Application definition
 
@@ -79,21 +77,7 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'pur_beurre',
-
-        'USER': 'postgres',
-
-        'PASSWORD': os.getenv('POSTGRESQL_PASSWORD'),
-
-        'HOST': 'localhost',
-
-        'PORT': '5432',
-
-    }
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
 }
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
