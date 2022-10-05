@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
 
 DATABASES = {
-    "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    "default": dj_database_url.parse("postgres://pur-beurre-db:AVNS_t2js0OzgoSJCCryh_X-@app-83db0b59-6363-4ba8-bc51-d12e9f9f37da-do-user-12578435-0.b.db.ondigitalocean.com:25060/pur-beurre-db")
 }
 
 
