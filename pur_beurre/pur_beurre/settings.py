@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
 
 DATABASES = {
-    "default": dj_database_url.parse(os.environ.get("postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_DATABASE}")),
+    "default": dj_database_url.config(os.environ.get("postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_DATABASE}")),
 }
 
 
