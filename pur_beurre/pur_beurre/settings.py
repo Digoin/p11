@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("django.db.backends.postgresql", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("DB_DATABASE", BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get("DB_USERNAME", "user"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
-        "HOST": os.environ.get("DB_HOSTNAME", "localhost"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_DATABASE"),
+        "USER": os.environ.get("DB_USERNAME"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOSTNAME"),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
 
