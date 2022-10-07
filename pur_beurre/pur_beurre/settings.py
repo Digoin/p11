@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+DATABASE_URL = 'postgresql://<postgresql>'
 
 DATABASES = {
     "default": dj_database_url.config(default = os.environ.get("postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_DATABASE}")),
