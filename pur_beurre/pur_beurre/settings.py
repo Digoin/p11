@@ -76,12 +76,16 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE_URL = 'postgresql://<postgresql>'
-
 DATABASES = {
-    "default": dj_database_url.config(default = os.environ.get("postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_DATABASE}")),
+    "default": {
+        "ENGINE": os.environ.get("django.db.backends.postgresql", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("DB_DATABASE", BASE_DIR / "db.sqlite3"),
+        "USER": os.environ.get("DB_USERNAME", "user"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
+        "HOST": os.environ.get("DB_HOSTNAME", "localhost"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
