@@ -11,6 +11,19 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+
+sentry_sdk.init(
+    dsn="https://60806b5146ca4e7099c0b7bd79b445e6@o4504015896903680.ingest.sentry.io/4504020717862912",
+    integrations=[DjangoIntegration()],
+
+    traces_sample_rate=1.0,
+
+    send_default_pii=True,
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,13 +89,9 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "pur-beurre",
-        "USER": "django",
-        "PASSWORD": os.environ.get("DB_PASSWORD", None),
-        "HOST": "private-django-db-do-user-12578435-0.b.db.ondigitalocean.com",
-        "PORT": 25060,
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
