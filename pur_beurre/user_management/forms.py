@@ -13,4 +13,4 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(label='Email')
+    username = forms.CharField(label='Nom d\'utilisateur')

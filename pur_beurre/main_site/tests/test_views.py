@@ -76,7 +76,7 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/signup/', status_code=302)
 
     def test_account_detail_authenticated(self):
-        self.client.login(username="martin", password="secret")
+        self.client.login(email="martin@internet.net", password="secret")
         response = self.client.get('/account/')
 
         self.assertEqual(response.status_code, 200)
@@ -102,7 +102,7 @@ class TestViews(TestCase):
 
     def test_product_description_one_better_product_and_favorite(self):
         self.user.product_set.add(self.product2)
-        self.client.login(username="martin", password="secret")
+        self.client.login(email="martin@internet.net", password="secret")
         response = self.client.get('/aliment/2/')
         
         self.assertEqual(response.status_code, 200)
@@ -126,7 +126,7 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/signup/', status_code=302)
 
     def test_favorites_no_favorites(self):
-        self.client.login(username="martin", password="secret")
+        self.client.login(email="martin@internet.net", password="secret")
         response = self.client.get('/favorites/')
 
         self.assertEqual(response.status_code, 200)
@@ -135,7 +135,7 @@ class TestViews(TestCase):
 
     def test_favorites_one_favorite(self):
         self.user.product_set.add(self.product1)
-        self.client.login(username="martin", password="secret")
+        self.client.login(email="martin@internet.net", password="secret")
         response = self.client.get('/favorites/')
 
         self.assertEqual(response.status_code, 200)
@@ -151,7 +151,7 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/signup/', status_code=302)
     
     def test_add_favorites(self):
-        self.client.login(username="martin", password="secret")
+        self.client.login(email="martin@internet.net", password="secret")
         response = self.client.post('/add-favorite/', {"product_id": 1})
 
         self.assertRedirects(response, '/aliment/1/', status_code=302)
@@ -159,7 +159,7 @@ class TestViews(TestCase):
 
     def test_delete_favorites(self):
         self.user.product_set.add(self.product1)
-        self.client.login(username="martin", password="secret")
+        self.client.login(email="martin@internet.net", password="secret")
         response = self.client.post('/add-favorite/', {"product_id": 1})
 
         self.assertRedirects(response, '/aliment/1/', status_code=302)
