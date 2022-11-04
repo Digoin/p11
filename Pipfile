@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+psycopg2 = "*"
+requests = "*"
+gunicorn = "*"
+whitenoise = "*"
+sentry-sdk = "*"
+
+[dev-packages]
+coverage = "*"
+webdriver-manager = "*"
+pytest-cov = "*"
+pytest = "*"
+pytest-django = "*"
+selenium = "*"
+
+[requires]
+python_version = "3.10"
