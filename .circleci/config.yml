@@ -18,11 +18,11 @@ jobs:
       - run:
           name: "Dependencies"
           command: |
-            "pipenv shell"
-            "pip install --dev"
+            sudo pip install pipenv
+            pipenv install
       - run:
           name: "Tests"
-          command: "pytest"
+          command: pytest
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
