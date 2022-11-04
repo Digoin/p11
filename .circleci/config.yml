@@ -17,7 +17,9 @@ jobs:
       - checkout
       - run:
           name: "Dependencies"
-          command: "pip install --dev"
+          command: |
+            "pipenv shell"
+            "pip install --dev"
       - run:
           name: "Tests"
           command: "pytest"
