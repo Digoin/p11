@@ -16,6 +16,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Dependencies"
+          command: "pip install --dev"
+      - run:
           name: "Tests"
           command: "pytest"
 
