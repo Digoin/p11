@@ -22,9 +22,6 @@ jobs:
             pipenv shell
             pipenv install --dev
 
-      - run:
-          name: "Tests"
-          command: pytest
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
