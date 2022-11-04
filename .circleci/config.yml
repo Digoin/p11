@@ -24,6 +24,7 @@ jobs:
       - run:
           name: "Tests"
           command: |
+            pipenv install pytest
             pipenv run "pytest"
 
 # Invoke jobs via workflows
