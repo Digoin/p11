@@ -1,10 +1,11 @@
 version: 2.1
+
 orbs:
-  python: circleci/python@1.0.0
+  python: circleci/python@1.2.0
+  
 workflows:
   main:
     jobs:
       - python/test:
-          args: '--dev'
-          pkg-manager: pipenv
+          pkg-manager: pip
           test-tool: pytest
