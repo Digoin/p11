@@ -18,8 +18,8 @@ jobs:
       - run:
           name: "Dependencies"
           command: |
-            sudo pip install pipenv
-            sudo pipenv install --dev
+            pipenv install django
+            pipenv install pytest
 
       - run:
           name: "Tests"
