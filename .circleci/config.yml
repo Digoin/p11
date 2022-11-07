@@ -12,8 +12,11 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: sudo ./pur_beurre/manage.py test
-          name: Test
+          name: "Setup custom environment variables"
+          command: export TESTING = True
+      - run:
+          name: "Test"
+          command: ./pur_beurre/manage.py test
 
 workflows:
   main:
