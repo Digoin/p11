@@ -13,7 +13,7 @@ jobs:
       - python/save-cache
       - run:
           name: "Setup custom environment variables"
-          command: export TESTING = True
+          command: export TESTING=True
       - run:
           name: "Test"
           command: ./pur_beurre/manage.py test
