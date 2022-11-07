@@ -12,7 +12,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: sudo home/project/pur_beurre/manage.py test
+          command: sudo ./pur_beurre/manage.py test
           name: Test
 
 workflows:
