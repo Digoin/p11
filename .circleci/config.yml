@@ -7,7 +7,7 @@ jobs:
       - image: cimg/postgres:14.1
         environment:
           POSTGRES_USER: example
-      - image: selenium/standalone-chrome:3.11.0
+      - image: selenium/standalone-chrome:107.0.5304.87
     steps:
       - checkout
       - run:
