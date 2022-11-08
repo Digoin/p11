@@ -10,6 +10,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: define environment variables
+          command: export TESTING=True
+      - run:
           name: install dependencies
           command: pip install -r requirements.txt
       - run:
