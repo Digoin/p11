@@ -14,6 +14,7 @@ jobs:
           command: |
             pip install --upgrade pip
             pip install -r requirements.txt
+            pip install packaging
             pip install webdriver-manager
             pip install selenium
       - run:
