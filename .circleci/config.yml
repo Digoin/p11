@@ -3,11 +3,11 @@ version: 2.1
 jobs:
   test-and-lint:
     docker:
-      - image: selenium/standalone-chrome:3.11.0
       - image: cimg/python:3.10.1
       - image: cimg/postgres:14.1
         environment:
           POSTGRES_USER: example
+      - image: selenium/standalone-chrome:3.11.0
     steps:
       - checkout
       - run:
