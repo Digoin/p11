@@ -1,26 +1,22 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@0.2.1
-
 jobs:
-  build-and-test:
-    executor: python/default
+  test-and-lint:
+    docker:
+      - image: cimg/python:3.10.1
     steps:
       - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
       - run:
-          name: "Setup custom environment variables"
-          command: |
-            export TESTING=True
-            sudo chown -R $USER:$USER ./pur_beurre/
+          name: install dependencies
+          command: pip install -r requirements.txt
       - run:
-          name: "Test"
-          command: ./pur_beurre/manage.py test
+          name: lint
+          command: pylint my_media/ media_organizer/
+      - run:
+          name: run tests
+          command: python manage.py test
 
 workflows:
-  main:
+  build-and-test-workflow:
     jobs:
-      - build-and-test
+      - test-and-lint
