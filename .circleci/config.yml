@@ -15,7 +15,7 @@ jobs:
           name: "Setup custom environment variables"
           command: |
             export TESTING=True
-            sudo chmod a+rwx .
+            sudo chmod a+rwx /pur_beurre/
       - run:
           name: "Test"
           command: ./pur_beurre/manage.py test
