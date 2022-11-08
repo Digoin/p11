@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 if TESTING:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'my_media',
+            'USER': 'example',
+            'PASSWORD': '1234',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 
@@ -93,10 +97,10 @@ else:
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": "pur-beurre",
-            "USER": "pur_beurre_admin",
-            "PASSWORD": "zcxNcWLnGol8umXpbDUh",
-            "HOST": "localhost",
-            "PORT": 5432,
+            "USER": "django",
+            "PASSWORD": os.environ.get("DB_PASSWORD", None),
+            "HOST": "private-django-db-do-user-12578435-0.b.db.ondigitalocean.com",
+            "PORT": 25060,
         }
     }
 
