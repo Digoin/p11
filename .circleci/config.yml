@@ -10,14 +10,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: define environment variables
-          command: export TESTING=True
-      - run:
           name: install dependencies
           command: pip install -r requirements.txt
       - run:
           name: run tests
           command: python pur_beurre/manage.py test pur_beurre/.
+          environment:
+            TESTING: True
+
 
 workflows:
   build-and-test-workflow:
