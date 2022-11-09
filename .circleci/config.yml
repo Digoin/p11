@@ -1,0 +1,35 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@2.1.1
+  browser-tools: circleci/browser-tools@1.4.0
+
+jobs:
+  test-and-lint:
+    docker:
+      - image: cimg/python:3.10.1-browsers
+      - image: cimg/postgres:14.1
+        environment:
+          POSTGRES_USER: example
+    steps:
+      - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          name: install dependencies
+          command: |
+            pip install -r requirements.txt
+            pip install packaging
+            pip install webdriver-manager
+            pip install selenium
+      - run:
+          name: run tests
+          command: python pur_beurre/manage.py test pur_beurre/.
+          environment:
+            TESTING: True
+
+
+workflows:
+  build-and-test-workflow:
+    jobs:
+      - test-and-lint

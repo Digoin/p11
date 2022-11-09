@@ -1,12 +1,12 @@
-import logging
-from django.test import LiveServerTestCase
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+from django.test import LiveServerTestCase
 from django.test import Client
-import time
-from user_management.models import UserExtension
+
 from main_site.models import Product, Category
 
 
@@ -73,26 +73,26 @@ class HostTest(LiveServerTestCase):
         driver.get(self.live_server_url)
         self.assertIn("Accueil", driver.title)
 
-        search_bar = driver.find_element_by_name("product_searched")
+        search_bar = driver.find_element("name", "product_searched")
         search_bar.send_keys("apple")
         search_bar.send_keys(Keys.ENTER)
         self.assertIn("Recherche", driver.title)
 
-        product = driver.find_element_by_class_name('product-presentation')
+        product = driver.find_element(By.CLASS_NAME, 'product-presentation')
         product.click()
 
-        product_title = driver.find_element_by_xpath('//div/h2[1]').text
+        product_title = driver.find_element(By.XPATH, '//div/h2[1]').text
         self.assertEqual("apple", product_title)
 
-        add_favorite = driver.find_element_by_class_name('disk-button')
+        add_favorite = driver.find_element(By.CLASS_NAME, 'disk-button')
         add_favorite.click()
         self.assertIn("Création de compte", driver.title)
 
-        username_form = driver.find_element_by_name('username')
-        email_form = driver.find_element_by_name('email')
-        password1_form = driver.find_element_by_name('password1')
-        password2_form = driver.find_element_by_name('password2')
-        validation = driver.find_element_by_xpath('//p/button')
+        username_form = driver.find_element("name", 'username')
+        email_form = driver.find_element("name", 'email')
+        password1_form = driver.find_element("name", 'password1')
+        password2_form = driver.find_element("name", 'password2')
+        validation = driver.find_element(By.XPATH, '//p/button')
 
         username_form.send_keys("martinos")
         email_form.send_keys("martinos.martin@internet.net")
@@ -101,23 +101,23 @@ class HostTest(LiveServerTestCase):
         validation.send_keys(Keys.ENTER)
         self.assertIn("Accueil", driver.title)
 
-        search_bar = driver.find_element_by_name("product_searched")
+        search_bar = driver.find_element("name", "product_searched")
         search_bar.send_keys("apple")
         search_bar.send_keys(Keys.ENTER)
         self.assertIn("Recherche", driver.title)
 
-        product = driver.find_element_by_class_name('product-presentation')
+        product = driver.find_element(By.CLASS_NAME, 'product-presentation')
         product.click()
 
-        product_title = driver.find_element_by_xpath('//div/h2[1]').text
+        product_title = driver.find_element(By.XPATH, '//div/h2[1]').text
         self.assertEqual("apple", product_title)
 
-        add_favorite = driver.find_element_by_class_name('disk-button')
+        add_favorite = driver.find_element(By.CLASS_NAME, 'disk-button')
         add_favorite.click()
 
-        favorite_link = driver.find_element_by_xpath('//a[3]')
+        favorite_link = driver.find_element(By.XPATH, '//a[3]')
         favorite_link.click()
 
-        product_title = driver.find_element_by_xpath('//div/h2[1]').text
+        product_title = driver.find_element(By.XPATH, '//div/h2[1]').text
         self.assertEqual("apple", product_title)
 

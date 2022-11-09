@@ -3,9 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from main_site.models import Product
 
 class UserExtension(AbstractUser):
-    pass
+    email = models.EmailField(unique=True)
 
-    # favorites = models.ManyToManyField(Product)
-
-    # USERNAME_FIELD = 'username'
-    # REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'email'

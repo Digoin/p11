@@ -32,13 +32,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+TESTING = os.getenv('TESTING', default=False)
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+if TESTING:
+    SECRET_KEY = "testing"
+else:
+    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = False
 
-ALLOWED_HOSTS = ['164.90.173.170', 'localhost']
+ALLOWED_HOSTS = ['164.90.173.170', 'localhost', "127.0.0.1"]
 
 # Application definition
 
@@ -88,16 +94,29 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "pur-beurre",
-        "USER": "django",
-        "PASSWORD": os.environ.get("DB_PASSWORD", None),
-        "HOST": "private-django-db-do-user-12578435-0.b.db.ondigitalocean.com",
-        "PORT": 25060,
+if TESTING:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'my_media',
+            'USER': 'example',
+            'PASSWORD': '1234',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
+
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "pur-beurre",
+            "USER": "django",
+            "PASSWORD": os.environ.get("DB_PASSWORD", None),
+            "HOST": "private-django-db-do-user-12578435-0.b.db.ondigitalocean.com",
+            "PORT": 25060,
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -149,5 +168,3 @@ LOGIN_REDIRECT_URL = '/'
 
 
 AUTH_USER_MODEL = 'user_management.UserExtension'
-
-AUTHENTICATION_BACKENDS = ['user_management.backends.EmailBackend']
