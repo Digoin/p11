@@ -86,7 +86,7 @@ def favorites(request):
 
     # Checking if user is authentificated
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user_management:signup'))
+        return HttpResponseRedirect(reverse('user_management:login'))
 
     favorite_products = request.user.product_set.all()
 
