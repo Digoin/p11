@@ -106,16 +106,16 @@ if TESTING:
         }
     }
 
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "pur-beurre",
-            "USER": "django",
-            "PASSWORD": os.environ.get("DB_PASSWORD", None),
-            "HOST": "private-django-db-do-user-12578435-0.b.db.ondigitalocean.com",
-            "PORT": 25060,
-        }
+else:     
+    DATABASES = {         
+        'default': {             
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',             
+            'NAME': 'db_p11',             
+            'USER': 'postgres',             
+            'PASSWORD': os.getenv('POSTGRESQL_PASSWORD'),             
+            'HOST': 'localhost',             
+            'PORT': '5432',         
+        }     
     }
 
 # Password validation
