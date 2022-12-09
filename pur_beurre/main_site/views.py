@@ -63,20 +63,15 @@ def product_description(request, product_id):
     return render(request, 'main_site/product_description_page.html', context)
 
 def product_research(request):
-    no_repetition_result = []
 
     # Executing the research
     research_result = Product.objects.annotate(
         similarity=TrigramWordSimilarity(f'{request.GET.get("product_searched")}', "name")
     ).filter(similarity__gte=0.5).order_by('-similarity')
 
-    # Creating a list without repetitions
-    for product in research_result:
-        if product not in no_repetition_result:
-            no_repetition_result.append(product)
 
     context = {
-        "results": no_repetition_result,
+        "results": research_result,
     }
 
     return render(request, 'main_site/product_research.html', context)
