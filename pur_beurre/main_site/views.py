@@ -2,7 +2,7 @@ import string
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from main_site.models import Product
-from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from django.contrib.postgres.search import TrigramWordSimilarity
 from django.urls import reverse
 
 # Create your views here.
@@ -64,11 +64,11 @@ def product_description(request, product_id):
 
 def product_research(request):
     no_repetition_result = []
-    vectors = SearchVector('name', weight='A') + SearchVector('category__name', weight='B')
-    query = SearchQuery(f'{request.GET.get("product_searched")}')
 
     # Executing the research
-    research_result = Product.objects.annotate(rank=SearchRank(vectors, query)).order_by('-rank')
+    research_result = Product.objects.annotate(
+        similarity=TrigramWordSimilarity(f'{request.GET.get("product_searched")}', "name")
+    ).filter(similarity__gte=0.5).order_by('-similarity')
 
     # Creating a list without repetitions
     for product in research_result:
