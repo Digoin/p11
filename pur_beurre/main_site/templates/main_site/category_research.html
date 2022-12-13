@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Recherche{% endblock title %}
+
+{% block content %}
+<form class = "row justify-content-center my-5" action = "/research_category/" method = "get">
+    {% csrf_token %}
+    <div class="col-1"></div>
+    <input class="col-6 col-sm-5 col-md-4 col-lg-3" id="category_searched" type="text" name="category_searched" placeholder="Recherche par catégorie">
+    <div class="col-1">
+        <input class="btn btn-primary" type="submit" value="Rechercher">
+    </div>
+</form>
+<div class="row">
+    {% for category in results %}
+        <div class="col-12 col-sm-6 col-lg-4">
+            <a href="{% url 'main_site:category_products' category.id %}">
+                <div>
+                    <h2 class="col text-center my-4">{{ category.name }}</h2>
+                </div>
+                <div class="row h4 mt-3 mb-5">
+                    <div class="col text-center">
+                        <span class="badge rounded-pill mussels-bg">{{ category.nutriscore }}</span>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-5">
+                    <a class="col category-presentation text-center"></a>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

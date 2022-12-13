@@ -12,7 +12,15 @@
             <div class="col-1"></div>
             <input class="col-6 col-sm-5 col-md-4 col-lg-3" id="product_searched" type="text" name="product_searched" placeholder="Recherche de produit">
             <div class="col-1">
-                <input class="btn btn-primary"  type="submit" value="Rechercher">
+                <input class="btn btn-primary" type="submit" value="Rechercher">
+            </div>
+        </form>
+        <form class = "row justify-content-center mt-5" action = "/research_category/" method = "get">
+            {% csrf_token %}
+            <div class="col-1"></div>
+            <input class="col-6 col-sm-5 col-md-4 col-lg-3" id="category_searched" type="text" name="category_searched" placeholder="Recherche par catégorie">
+            <div class="col-1">
+                <input class="btn btn-primary" type="submit" value="Rechercher">
             </div>
         </form>
 </div>
