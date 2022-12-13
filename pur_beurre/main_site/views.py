@@ -1,7 +1,7 @@
 import string
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
-from main_site.models import Product
+from main_site.models import Product, Category
 from django.contrib.postgres.search import TrigramWordSimilarity
 from django.urls import reverse
 
@@ -75,6 +75,35 @@ def product_research(request):
     }
 
     return render(request, 'main_site/product_research.html', context)
+
+def category_research(request):
+
+    # Executing the research
+    research_result = Category.objects.annotate(
+        similarity=TrigramWordSimilarity(f'{request.GET.get("category_searched")}', "name")
+    ).filter(similarity__gte=0.5).order_by('-similarity')
+
+
+    context = {
+        "results": research_result,
+    }
+
+    return render(request, 'main_site/category_research.html', context)
+
+def products_of_category(request, category_id):
+
+    category_products = []
+
+    category = Category.objects.get(id=category_id)
+
+    for products in category.products.all():
+        category_products.append(products)
+    
+    context = {
+        "results": category_products,
+    }
+
+    return render(request, 'main_site/product_research.html', context)        
 
 def favorites(request):
     favorite_message = "Produits favoris"
