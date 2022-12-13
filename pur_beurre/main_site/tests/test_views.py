@@ -123,7 +123,7 @@ class TestViews(TestCase):
 
         response.user = AnonymousUser()
 
-        self.assertRedirects(response, '/signup/', status_code=302)
+        self.assertRedirects(response, '/login/', status_code=302)
 
     def test_favorites_no_favorites(self):
         self.client.login(email="martin@internet.net", password="secret")
