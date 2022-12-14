@@ -64,7 +64,7 @@ def product_description(request, product_id):
 
 def product_research(request):
 
-    # Executing the research
+    # Executing the trigram research
     research_result = Product.objects.annotate(
         similarity=TrigramWordSimilarity(f'{request.GET.get("product_searched")}', "name")
     ).filter(similarity__gte=0.5).order_by('-similarity')
@@ -78,7 +78,7 @@ def product_research(request):
 
 def category_research(request):
 
-    # Executing the research
+    # Executing the trigram research
     research_result = Category.objects.annotate(
         similarity=TrigramWordSimilarity(f'{request.GET.get("category_searched")}', "name")
     ).filter(similarity__gte=0.5).order_by('-similarity')

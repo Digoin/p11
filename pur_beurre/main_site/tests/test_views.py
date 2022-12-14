@@ -3,7 +3,6 @@ from django.contrib.auth.models import AnonymousUser
 
 from user_management.models import UserExtension
 from main_site.models import Product, Category
-from django.contrib.postgres.search import TrigramWordSimilarity
 
 
 class TestViews(TestCase):
@@ -57,8 +56,8 @@ class TestViews(TestCase):
         )
 
         # Setting up categories
-        self.category1 = Category.objects.create(name="fruit")
-        self.category2 = Category.objects.create(name="cake")
+        self.category1 = Category.objects.create(id=1, name="fruit")
+        self.category2 = Category.objects.create(id=2, name="cake")
         self.category1.products.set([self.product1, self.product2])
         self.category2.products.set([self.product3])
 
@@ -111,12 +110,24 @@ class TestViews(TestCase):
         self.assertEqual(response.context['substitute_products'], [self.product1])
         self.assertEqual(list(response.context['favorite_products']), [self.product2])
 
-# Test product_research
+# Test research
     def test_product_research(self):
         response = self.client.get('/research/', {"product_searched": "apple"})
-
+        
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['results']), [self.product1, self.product3])
+
+    def test_category_research(self):
+        response = self.client.get('/research_category/', {"category_searched": "fruit"})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['results']), [self.category1])
+
+    def test_product_of_category(self):
+        response = self.client.get('/category_products/1/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['results']), [self.product1, self.product2])
 
 # Test favorites
     def test_favorites_not_authenticated(self):
