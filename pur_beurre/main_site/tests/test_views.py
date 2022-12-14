@@ -3,6 +3,7 @@ from django.contrib.auth.models import AnonymousUser
 
 from user_management.models import UserExtension
 from main_site.models import Product, Category
+from django.contrib.postgres.search import TrigramWordSimilarity
 
 
 class TestViews(TestCase):
@@ -115,7 +116,7 @@ class TestViews(TestCase):
         response = self.client.get('/research/', {"product_searched": "apple"})
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['results'], [self.product1, self.product3, self.product2])
+        self.assertEqual(list(response.context['results']), [self.product1, self.product3])
 
 # Test favorites
     def test_favorites_not_authenticated(self):

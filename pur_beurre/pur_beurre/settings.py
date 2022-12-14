@@ -42,7 +42,7 @@ else:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['164.90.173.170', 'localhost', "127.0.0.1"]
 
